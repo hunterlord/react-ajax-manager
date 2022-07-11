@@ -117,7 +117,7 @@ export default function UserRemove() {
   const ar = useSelector(selectApiUserRemoveDynamic);
 
   const handleRemove = () => {
-    dispatch(apiRecipeRemove(removeId, store).actions.request({ id: removeId }));
+    dispatch(apiUserRemove(removeId, store).actions.request({ id: removeId }));
   };
 
   return <div onClick={handleRemove}>test remove {ar[removeId]?.get('onFetch')}</div>;
