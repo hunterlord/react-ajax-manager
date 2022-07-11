@@ -1,6 +1,7 @@
 # AJAX-MANAGER
 
 目前仍在测试完善中；
+(DEMO)[https://github.com/hunterlord/ajax-manager-demo/tree/main/react]
 
 `react-ajax-manager`使用`axios`、`redux`、`immutable` 来快速创建`ajax`过程常用的状态，并自动处理。
 且提供了处理接口，意在减少 ajax 相关开发工作量。
