@@ -163,7 +163,7 @@ class AjaxManager {
       events = {},
     } = createConfig;
 
-    const { onFinal } = Object.assign({}, this.getEvents(), events);
+    const { beforeRequest, onError, onFinal } = Object.assign({}, this.getEvents(), events);
 
     if (!name) throw new Error('config.name is not set');
     if (!path) throw new Error('config.path is not set');
@@ -200,6 +200,7 @@ class AjaxManager {
 
         if (!config.data) config.data = {};
 
+        if (beforeRequest) beforeRequest(dispatch, currentState, getState);
         const r = this.instance(config)
           .then((response) => {
             let isFailure = false;
@@ -220,6 +221,7 @@ class AjaxManager {
             if (!axios.isCancel(e)) {
               const processError = process.error || this.processes.error || ((x) => x);
               dispatch(createAction(ERROR)(processError(e, dispatch)));
+              if (onError) onError(dispatch, currentState, getState);
             }
           })
           .finally(() => {
