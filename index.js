@@ -290,6 +290,8 @@ var AjaxManager = /*#__PURE__*/function () {
           events = _createConfig$events === void 0 ? {} : _createConfig$events;
 
       var _Object$assign = Object.assign({}, this.getEvents(), events),
+          beforeRequest = _Object$assign.beforeRequest,
+          onError = _Object$assign.onError,
           onFinal = _Object$assign.onFinal;
 
       if (!name) throw new Error('config.name is not set');
@@ -351,6 +353,7 @@ var AjaxManager = /*#__PURE__*/function () {
                       config.method = method;
                       config[methodDataKey] = params;
                       if (!config.data) config.data = {};
+                      if (beforeRequest) beforeRequest(dispatch, currentState, getState);
                       r = _this.instance(config).then(function (response) {
                         var isFailure = false;
                         var checkFailure = check.failure || _this.checks.failure;
@@ -379,6 +382,7 @@ var AjaxManager = /*#__PURE__*/function () {
                           };
 
                           dispatch(createAction(ERROR)(processError(e, dispatch)));
+                          if (onError) onError(dispatch, currentState, getState);
                         }
                       })["finally"](function () {
                         if (onFinal) onFinal(dispatch, currentState, getState);
@@ -394,7 +398,7 @@ var AjaxManager = /*#__PURE__*/function () {
 
                       return _context.abrupt("return", r);
 
-                    case 19:
+                    case 20:
                     case "end":
                       return _context.stop();
                   }
