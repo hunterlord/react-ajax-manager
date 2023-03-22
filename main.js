@@ -159,7 +159,7 @@ class AjaxManager {
       transform = {},
       check = {},
       process = {},
-      resetOnRquest = true,
+      resetOnRequest = true,
       events = {},
     } = createConfig;
 
@@ -201,6 +201,7 @@ class AjaxManager {
         if (!config.data) config.data = {};
 
         if (beforeRequest) beforeRequest(dispatch, currentState, getState);
+
         const r = this.instance(config)
           .then((response) => {
             let isFailure = false;
@@ -258,7 +259,7 @@ class AjaxManager {
         case REQUEST:
           {
             let newState = defaultState.set('onFetch', true);
-            if (!resetOnRquest) newState = newState.set('data', state.get('data'));
+            if (!resetOnRequest) newState = newState.set('data', state.get('data'));
             const { cancelTokenSource, params } = payload;
             return newState.set('tokenSource', cancelTokenSource).set('params', params);
           }

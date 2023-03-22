@@ -284,8 +284,8 @@ var AjaxManager = /*#__PURE__*/function () {
           check = _createConfig$check === void 0 ? {} : _createConfig$check,
           _createConfig$process = createConfig.process,
           process = _createConfig$process === void 0 ? {} : _createConfig$process,
-          _createConfig$resetOn = createConfig.resetOnRquest,
-          resetOnRquest = _createConfig$resetOn === void 0 ? true : _createConfig$resetOn,
+          _createConfig$resetOn = createConfig.resetOnRequest,
+          resetOnRequest = _createConfig$resetOn === void 0 ? true : _createConfig$resetOn,
           _createConfig$events = createConfig.events,
           events = _createConfig$events === void 0 ? {} : _createConfig$events;
 
@@ -471,7 +471,7 @@ var AjaxManager = /*#__PURE__*/function () {
           case REQUEST:
             {
               var newState = defaultState.set('onFetch', true);
-              if (!resetOnRquest) newState = newState.set('data', state.get('data'));
+              if (!resetOnRequest) newState = newState.set('data', state.get('data'));
               var cancelTokenSource = payload.cancelTokenSource,
                   params = payload.params;
               return newState.set('tokenSource', cancelTokenSource).set('params', params);
